@@ -29,6 +29,9 @@ int main(int argc, char* argv[]) {
   bool is_gopro_video = nh_private.getParam("gopro_video", gopro_video);
   bool is_gopro_folder = nh_private.getParam("gopro_folder", gopro_folder);
 
+
+
+
   if (!is_gopro_video && !is_gopro_folder) {
     ROS_FATAL("Please specify the gopro video or folder");
     ros::shutdown();
@@ -90,10 +93,13 @@ int main(int argc, char* argv[]) {
     GoProImuExtractor imu_extractor(file.string());
     GoProVideoExtractor video_extractor(file.string(), scaling, true);
 
-    if (i == 0 && imu_extractor.getNumofSamples(STR2FOURCC("MAGN"))) {
-      has_magnetic_field_readings = true;
-    }
-
+//     if (i == 0 && imu_extractor.getNumofSamples(STR2FOURCC("MAGN"))) {
+//       has_magnetic_field_readings = true;
+//     }
+// std::cout<<"runhere"<<std::endl;
+// std::cout<<"runhere"<<std::endl;
+// std::cout<<"runhere"<<std::endl;
+// std::cout<<"runhere"<<std::endl;
     imu_extractor.getPayloadStamps(STR2FOURCC("ACCL"), start_stamps, samples);
     ROS_INFO_STREAM("[ACCL] Payloads: " << start_stamps.size()
                                         << " Start stamp: " << start_stamps[0]
@@ -109,13 +115,13 @@ int main(int argc, char* argv[]) {
                                          << " Start stamp: " << start_stamps[0]
                                          << " End stamp: " << start_stamps[samples.size() - 1]
                                          << " Total Samples: " << samples.at(samples.size() - 1));
-    if (has_magnetic_field_readings) {
-      imu_extractor.getPayloadStamps(STR2FOURCC("MAGN"), start_stamps, samples);
-      ROS_INFO_STREAM("[MAGN] Payloads: " << start_stamps.size()
-                                          << " Start stamp: " << start_stamps[0]
-                                          << " End stamp: " << start_stamps[samples.size() - 1]
-                                          << " Total Samples: " << samples.at(samples.size() - 1));
-    }
+    // if (has_magnetic_field_readings) {
+    //   imu_extractor.getPayloadStamps(STR2FOURCC("MAGN"), start_stamps, samples);
+    //   ROS_INFO_STREAM("[MAGN] Payloads: " << start_stamps.size()
+    //                                       << " Start stamp: " << start_stamps[0]
+    //                                       << " End stamp: " << start_stamps[samples.size() - 1]
+    //                                       << " Total Samples: " << samples.at(samples.size() - 1));
+    // }
 
     uint64_t accl_end_stamp = 0, gyro_end_stamp = 0;
     uint64_t video_end_stamp = 0;

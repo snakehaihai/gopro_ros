@@ -1,14 +1,14 @@
 <launch>
 
   <!-- Arguments -->
-  <arg name="gopro_video" default="/home/bjoshi/gopro_cave/GX010013.MP4"/>
+  <arg name="gopro_video" default="/home/nuc/ws_gopro/data/GH010620.MP4"/>
   <arg name="gopro_folder" default="/home/bjoshi/gopro_cave"/>
   <arg name="multiple_files" default="false"/>
-  <arg name="rosbag" default="/home/bjoshi/gopro_cave/GX010013.bag"/>
-  <arg name="scale" default="0.5"/>
+  <arg name="rosbag" default="/home/nuc/ws_gopro/data/GH010620.bag"/>
+  <arg name="scale" default="1"/>
   <arg name="compressed_image_format" default="true"/>
-  <arg name="grayscale" default="true"/>
-  <arg name="display_images" default="false"/>
+  <arg name="grayscale" default="false"/>
+  <arg name="display_images" default="true"/>
 
   <node name="$(anon gopro_to_rosbag)" pkg="gopro_ros" type="gopro_to_rosbag" output="screen" required="true"> 
     <param name="gopro_video" value="$(arg gopro_video)"/>
